@@ -1,0 +1,24 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+  <title>Главная</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <link rel = "stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body class="d-flex flex-column min-vh-100">
+<header th:insert = "\blocks\header :: header"></header>
+<div class="container mt-5">
+  <div class="alert alert-info mt-2">
+    <h3>У Вас уже есть менеджер для этого ЖК.</h3>
+    <h3>Можете разорвать контракт.</h3>
+    <p th:text="${AC.getName()}"></p>
+    <div class="text-end">
+      <form action = "/hasManager" method="POST" >
+        <input type="hidden" name="acId" th:value="${AC.id}"/>
+        <button type="submit" class="btn btn-warning">разорвать контракт</button>
+      </form>
+    </div>
+  </div>
+</div>
+</body>
+</html>

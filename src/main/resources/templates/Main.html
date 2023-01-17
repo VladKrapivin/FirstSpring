@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <title>Главная</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel = "stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body class="d-flex flex-column min-vh-100">
+<header th:insert = "\blocks\header :: header"></header>
+
+<div id="link"></div>
+
+<div class="container mt-5">
+    <div th:each="el : ${userac}" class="alert alert-info mt-2">
+        <form method="POST" >
+            <h3 th:text="${el.AC.getName()}"></h3>
+            <h4>Количество<p th:text="${el.count}"></p></h4>
+            <div class="text-end">
+                <a th:href="'/main/sell/'+${el.id}" class="btn btn-warning">Продать</a>
+            </div>
+        </form>
+        <form method="get" action="/managerInfo">
+            <input type="hidden" name="acId" th:value="${el.AC.getId()}"/>
+            <button type="submit" class="btn btn-warning">Информация о Менеджере</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<div th:fragment="header">
+  <header class="p-2 text-bg-dark">
+    <div class="container">
+      <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+
+        <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+
+          <li>
+            <a href="/main" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-warning text-decoration-none">
+              <img th:src="@{/images/logo.png}" alt="" width="60" height="60" class="rounded circle" >
+              <span class="fs-3">APOLLO</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="/market" class="nav-link px-2 fs-3 text-white">Отдел продаж</a>
+          </li>
+
+          <li sec:authorize="hasRole('ADMIN')">
+            <a href="/" class="nav-link px-2 fs-3 text-white" th:href="@{/admin}">Администрирование</a>
+          </li>
+          <li sec:authorize="hasRole('MANAGER')">
+            <a href="/" class="nav-link px-2 fs-3 text-white" th:href="@{/manager}">Панель менеджера</a>
+          </li>
+
+        </ul>
+
+
+        <div class="text-end">
+            <p class="nav-link px-2 text-white">Баланс :<span th:text="${user.cash}"></span></p>
+          <form th:action="@{/logout}" method="post">
+            <button class="btn btn btn-warning" type="submit" value="Sign Out">Sign out</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </header>
+</div>

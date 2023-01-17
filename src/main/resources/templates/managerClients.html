@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+  <title>Отдел продаж</title>
+  <meta charset="UTF-8" />
+  <link rel = "stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body class="d-flex flex-column min-vh-100">
+<header th:insert = "\blocks\header :: header"></header>
+<header th:insert = "\blocks\manager_header :: header_br"></header>
+<table class="table table-hover table-bordered border-primary alert alert-info mt-2">
+  <thead align="center">
+  <th>ID</th>
+  <th>UserName</th>
+  <th>User ID</th>
+  <th>AC</th>
+  <th>AC ID</th>
+  <th>AC cost for square meter</th>
+  <th>User balance</th>
+  <th>Current number of meters</th>
+  <th>AC number</th>
+  </thead>
+  <div th:each="el : ${allClients}" >
+    <tr>
+      <td th:text="${el.id}"></td>
+      <td th:text="${el.user.getUsername()}"></td>
+      <td th:text="${el.user.getId()}"></td>
+      <td th:text="${el.AC.getName()}"></td>
+      <td th:text="${el.AC.getId()}"></td>
+      <td th:text="${el.AC.getCost()}"></td>
+      <td th:text="${el.user.getCash()}"></td>
+      <td th:text="${el.count}"></td>
+      <form method="POST" action="/manager/clients/buy">
+        <td><input class="form-control" name="count"></td>
+      <td>
+        <input type="hidden" name="userId" th:value="${el.user.getId()}">
+        <input type="hidden" name="coinId" th:value="${el.AC.getId()}">
+      <button type="submit" class="btn form-control btn-warning">Купить</button>
+    </td>
+      </form>
+      <td>
+        <form method="POST" action="/manager/clients/off">
+          <input type="hidden" name="userId" th:value="${el.user.getId()}">
+          <input type="hidden" name="acId" th:value="${el.AC.getId()}">
+          <button type="submit" class="btn form-control btn-danger">Отказаться</button>
+        </form>
+      </td>
+    </tr>
+  </div>
+</div>
+</table>
+
+</body>
+</html>
