@@ -14,7 +14,7 @@
     <div th:each="el : ${userac}" class="alert alert-info mt-2">
         <form method="POST" >
             <h3 th:text="${el.AC.getName()}"></h3>
-            <h4>Количество<p th:text="${el.count}"></p></h4>
+            <h4>Площадь приобретенной территории (в кв.м)<p th:text="${el.count}"></p></h4>
             <div class="text-end">
                 <a th:href="'/main/sell/'+${el.id}" class="btn btn-warning">Продать</a>
             </div>
@@ -25,5 +25,6 @@
         </form>
     </div>
 </div>
+<div th:insert = "\blocks\footer :: footer" class="mt-auto py-4 py-md-5 bg-light"></div>
 </body>
 </html>
